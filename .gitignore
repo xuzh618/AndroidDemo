@@ -1,3 +1,6 @@
+#OS gen file
+.DS_Store
+
 # Built application files
 *.apk
 *.aar
