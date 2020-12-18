@@ -2,6 +2,7 @@ package com.tiger.myapplication;
 
 import android.os.Bundle;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -9,12 +10,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+
+import java.lang.ref.WeakReference;
+import java.util.LinkedHashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,16 +39,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     //view event dispatch
-    private void eventDispatch(){
+    private void eventDispatch() {
 
-        Log.d(TAG,"eventDispatch()");
+        Log.d(TAG, "eventDispatch()");
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Log.d(TAG,"setOnClickListener()");
+                Log.d(TAG, "setOnClickListener()");
 
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -53,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                Log.d(TAG,"setOnTouchListener()");
+                Log.d(TAG, "setOnTouchListener()");
 
 //                return true;
                 return false;
@@ -78,25 +85,23 @@ public class MainActivity extends AppCompatActivity {
 
     //ndk demo
     // 1. load library
-//    static {
-//        System.loadLibrary("jnilib");
-//    }
+    static {
+        System.loadLibrary("hello");
+    }
 
     // 2. define native method
-    private native String getStringFromNative();
-
-    private native String getStringIntNative();
+    private native void methodFromNative();
 
 
-    // 3. Java call method
+    //3. Java call method
     private void ndkMethod() {
         Log.d(TAG, "ndkMethod()");
 
-        Log.i(TAG, "getStringFromNative()=" + getStringFromNative());
+        Log.i(TAG, "methodFromNative");
 
-        Log.i(TAG, "getStringIntNative()=" + getStringIntNative());
+        methodFromNative();
+
     }
-
 
 
     @Override

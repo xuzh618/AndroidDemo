@@ -1,5 +1,8 @@
 package com.tiger.myapplication.http;
 
+import com.bumptech.glide.Glide;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
