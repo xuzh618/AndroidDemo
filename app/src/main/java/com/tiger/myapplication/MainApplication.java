@@ -5,33 +5,40 @@ import android.content.res.Configuration;
 
 import androidx.annotation.NonNull;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+
 public class MainApplication extends Application {
 
-    private static MainApplication mInstance;
+    private static MainApplication mAppInstance;
 
-    public static MainApplication getInstance() {
-
-        if (mInstance == null) {
-            synchronized (MainApplication.class) {
-                if (mInstance == null) {
-                    mInstance = new MainApplication();
-                }
-            }
-        }
-        return mInstance;
-    }
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        mInstance = this;
+        mAppInstance = this;
+
+        initArouterConfig();
+    }
+
+    private final static boolean DEBUG = true;
+
+    private void initArouterConfig() {
+
+        if (DEBUG) {           // These two lines must be written before init, otherwise these configurations will be invalid in the init process
+            ARouter.openLog();     // Print log
+            ARouter.openDebug();   // Turn on debugging mode (If you are running in InstantRun mode, you must turn on debug mode! Online version needs to be closed, otherwise there is a security risk)
+        }
+        ARouter.init(mAppInstance); // As early as possible, it is recommended to initialize in the Application
     }
 
 
     @Override
     public void onTerminate() {
         super.onTerminate();
+
+        //destroy
+        ARouter.getInstance().destroy();
     }
 
     @Override

@@ -2,28 +2,28 @@ package com.tiger.myapplication;
 
 import android.os.Bundle;
 
-import com.bumptech.glide.Glide;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.tiger.myapplication.arouter.ArouterConstants;
+import com.tiger.myapplication.arouter.Person;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 
-import java.lang.ref.WeakReference;
-import java.util.LinkedHashMap;
-
+@Route(path = ArouterConstants.ACTIVITY_URL_MAIN)
 public class MainActivity extends AppCompatActivity {
+
+    private  static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 时间分发
         eventDispatch();
-
         init();
-
     }
 
 
@@ -46,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "eventDispatch()");
 
         FloatingActionButton fab = findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
 
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                // ARouter instance()
+                ARouter.getInstance()
+                        .build(ArouterConstants.ACTIVITY_URL_LOGIN)
+                        .withString("name", "tiger")
+                        .withInt("age", 18)
+                        .withParcelable("xuzhaohu", new Person("tiger2", 26, true))
+                        .navigation();
 
             }
         });
@@ -74,9 +81,6 @@ public class MainActivity extends AppCompatActivity {
         // onTouch 返回值会影响 onClick的值
 
     }
-
-
-    private static final String TAG = "TIGER";
 
     private void init() {
 
