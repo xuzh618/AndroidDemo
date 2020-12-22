@@ -21,15 +21,15 @@ public class GetExample {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        System.out.println("Okhttp main()");
-
-
-        GetExample getExample = new GetExample();
-        String response = getExample.run("https://link.bi.sensetime.com/sl/v2/company");
-
-
-        System.out.println("response=" + response);
-    }
+//    public static void main(String[] args) throws IOException {
+//        System.out.println("Okhttp main()");
+//
+//
+//        GetExample getExample = new GetExample();
+//        String response = getExample.run("https://link.bi.sensetime.com/sl/v2/company");
+//
+//
+//        System.out.println("response=" + response);
+//    }
 
 }

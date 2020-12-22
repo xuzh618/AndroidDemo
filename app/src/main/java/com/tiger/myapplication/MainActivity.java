@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         // 时间分发
         eventDispatch();
 
+        init();
+
     }
 
 
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Log.d(TAG, "setOnClickListener()");
+
+                ndkMethod();
 
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
